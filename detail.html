@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detail Artikel — Reisky Bestary</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+  --ink: #0d1117;
+  --ink-soft: #374151;
+  --ink-muted: #9ca3af;
+  --accent: #b45309;
+  --accent-light: #fef3c7;
+  --paper: #faf9f6;
+  --white: #ffffff;
+  --rule: #e5e0d8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── NAVBAR ── */
+.navbar {
+  padding: 20px 0;
+  background: rgba(250,249,246,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  text-decoration: none;
+}
+
+.navbar-brand span {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-left: 3px;
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+
+.nav-link {
+  margin-left: 28px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--accent);
+  transition: width 0.25s;
+}
+
+.nav-link:hover,
+.nav-link.active { color: var(--ink); }
+
+.nav-link:hover::after,
+.nav-link.active::after { width: 100%; }
+
+/* ── ARTICLE SECTION ── */
+.article-section {
+  padding: 60px 0 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── BACK BUTTON ── */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: 40px;
+}
+
+.back-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── EYEBROW ── */
+.article-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.article-eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 28px; height: 1px;
+  background: var(--accent);
+}
+
+/* ── TITLE ── */
+.article-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+}
+
+.article-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* ── META ── */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.meta-dot {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--rule);
+  display: inline-block;
+}
+
+/* ── IMAGE ── */
+.article-image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 40px;
+  display: block;
+  filter: brightness(0.97);
+}
+
+/* ── CONTENT ── */
+.article-content {
+  font-size: 17px;
+  line-height: 2;
+  color: var(--ink-soft);
+  font-weight: 300;
+  margin-bottom: 60px;
+}
+
+.article-content p {
+  margin-bottom: 22px;
+}
+
+.article-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Drop cap untuk paragraf pertama */
+.article-content p:first-child::first-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 78px;
+  font-weight: 700;
+  color: var(--accent);
+  float: left;
+  line-height: 0.72;
+  margin: 10px 12px 0 0;
+}
+
+/* ── DIVIDER ── */
+.section-divider {
+  text-align: center;
+  margin: 50px 0;
+  color: var(--ink-muted);
+  font-size: 18px;
+  letter-spacing: 12px;
+}
+
+/* ── COMMENT SECTION ── */
+.comment-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.comment-section-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.comment-section-sub {
+  font-size: 14px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+/* ── FORM ── */
+.comment-form-wrap {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 36px;
+  margin-bottom: 32px;
+}
+
+.form-label-custom {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-control-custom {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 22px;
+}
+
+.form-control-custom::placeholder {
+  color: var(--ink-muted);
+}
+
+.form-control-custom:focus {
+  border-color: var(--accent);
+  background: var(--white);
+}
+
+textarea.form-control-custom {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.form-row-custom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 20px;
+}
+
+.send-btn {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background 0.2s, border-color 0.2s;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.send-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── COMMENT CARDS ── */
+.comment-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 22px 26px;
+  margin-bottom: 14px;
+  transition: border-color 0.2s;
+}
+
+.comment-card:hover {
+  border-color: #c8c0b4;
+}
+
+.comment-card.new-comment {
+  border-left: 2px solid var(--accent);
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.comment-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.comment-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.comment-date {
+  font-size: 11px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+
+.comment-text {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.85;
+  font-weight: 300;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 36px 0;
+  background: var(--ink);
+  color: #6b7280;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+
+footer span { color: var(--accent); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.article-eyebrow  { animation: fadeUp 0.5s ease both; animation-delay: 0.1s; }
+.article-title    { animation: fadeUp 0.5s ease both; animation-delay: 0.2s; }
+.article-meta     { animation: fadeUp 0.5s ease both; animation-delay: 0.3s; }
+.article-image    { animation: fadeUp 0.6s ease both; animation-delay: 0.35s; }
+.article-content  { animation: fadeUp 0.6s ease both; animation-delay: 0.45s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .article-title { font-size: 38px; }
+  .article-image { height: 260px; }
+  .comment-section-title { font-size: 30px; }
+  .form-row-custom { grid-template-columns: 1fr; gap: 0; }
+  .comment-form-wrap { padding: 24px 18px; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+
+    <a class="navbar-brand" href="index.html">RB<span></span></a>
+
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link active" href="artikel.html">Pojok Menulis</a></li>
+        <li class="nav-item"><a class="nav-link" href="tentang.html">Tentang</a></li>
+        <li class="nav-item"><a class="nav-link" href="kontak.html">Kontak</a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ARTICLE -->
+<section class="article-section">
+  <div class="container">
+
+    <a href="artikel.html" class="back-btn">← Kembali</a>
+
+    <div id="articleEyebrow" class="article-eyebrow">Artikel</div>
+
+    <h1 id="articleTitle" class="article-title"></h1>
+
+    <div class="article-meta">
+      <span>Reisky Bestary</span>
+      <span class="meta-dot"></span>
+      <span id="articleDate"></span>
+      <span class="meta-dot"></span>
+      <span id="articleReadTime"></span>
+    </div>
+
+    <img id="articleImage" class="article-image" alt="Gambar Artikel">
+
+    <div id="articleContent" class="article-content"></div>
+
+    <div class="section-divider">— ✦ —</div>
+
+    <!-- KOMENTAR -->
+    <div class="mt-2">
+
+      <h2 class="comment-section-title">Komentar <em>Pengunjung</em></h2>
+      <p class="comment-section-sub">Bagikan pemikiran Anda tentang artikel ini.</p>
+
+      <div class="comment-form-wrap">
+        <div class="form-row-custom">
+          <div>
+            <label class="form-label-custom">Nama Lengkap</label>
+            <input type="text" id="name" class="form-control-custom" placeholder="Nama Anda">
+          </div>
+          <div>
+            <label class="form-label-custom">Alamat Email</label>
+            <input type="email" id="email" class="form-control-custom" placeholder="email@domain.com">
+          </div>
+        </div>
+
+        <label class="form-label-custom">Komentar</label>
+        <textarea id="comment" class="form-control-custom" placeholder="Tuliskan komentar Anda..."></textarea>
+
+        <button id="sendBtn" class="send-btn">Kirim Komentar →</button>
+      </div>
+
+      <div id="commentList"></div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    © 2026 <span>Reisky Bestary</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+
+import { db } from "./firebase.js";
+
+import {
+  doc,
+  getDoc,
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+/* ── HELPERS ── */
+
+function getInitials(name) {
+  return name.trim().split(' ')
+    .map(w => w[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
+}
+
+function formatDate(timestamp) {
+  if (!timestamp) return '';
+  const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+  return date.toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
+function estimateReadTime(text) {
+  const words = text.replace(/<[^>]+>/g, '').split(/\s+/).length;
+  const minutes = Math.max(1, Math.round(words / 200));
+  return `${minutes} mnt baca`;
+}
+
+/* ── LOAD ARTIKEL ── */
+
+async function loadArticle() {
+  if (!id) return;
+
+  const docRef = doc(db, "articles", id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    const data = docSnap.data();
+
+    if (data.imageUrl) {
+      document.getElementById("articleImage").src = data.imageUrl;
+    }
+
+    if (data.category) {
+      document.getElementById("articleEyebrow").textContent = data.category;
+    }
+
+    document.getElementById("articleTitle").innerHTML = data.title;
+    document.getElementById("articleContent").innerHTML = data.content;
+
+    if (data.createdAt) {
+      document.getElementById("articleDate").textContent = formatDate(data.createdAt);
+    }
+
+    document.getElementById("articleReadTime").textContent =
+      estimateReadTime(data.content || '');
+
+    document.title = `${data.title} — Reisky Bestary`;
+  }
+}
+
+loadArticle();
+
+/* ── KIRIM KOMENTAR ── */
+
+const sendBtn = document.getElementById("sendBtn");
+
+sendBtn.addEventListener("click", async () => {
+  const name    = document.getElementById("name").value.trim();
+  const email   = document.getElementById("email").value.trim();
+  const comment = document.getElementById("comment").value.trim();
+
+  if (!name || !comment) {
+    alert("Mohon isi nama dan komentar Anda.");
+    return;
+  }
+
+  sendBtn.textContent = "Mengirim...";
+  sendBtn.disabled = true;
+
+  try {
+    await addDoc(collection(db, "comments"), {
+      articleId: id,
+      name,
+      email,
+      comment,
+      createdAt: new Date()
+    });
+
+    document.getElementById("name").value    = "";
+    document.getElementById("email").value   = "";
+    document.getElementById("comment").value = "";
+  } catch (err) {
+    alert("Gagal mengirim komentar. Coba lagi.");
+    console.error(err);
+  }
+
+  sendBtn.textContent = "Kirim Komentar →";
+  sendBtn.disabled = false;
+});
+
+/* ── TAMPIL KOMENTAR (realtime) ── */
+
+const q = query(
+  collection(db, "comments"),
+  orderBy("createdAt", "desc")
+);
+
+onSnapshot(q, (snapshot) => {
+  const commentList = document.getElementById("commentList");
+  commentList.innerHTML = "";
+
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    if (data.articleId !== id) return;
+
+    const initials = getInitials(data.name);
+    const dateStr  = formatDate(data.createdAt);
+
+    commentList.innerHTML += `
+      <div class="comment-card">
+        <div class="comment-header">
+          <div class="comment-avatar">${initials}</div>
+          <div>
+            <div class="comment-name">${data.name}</div>
+            <div class="comment-date">${dateStr}</div>
+          </div>
+        </div>
+        <p class="comment-text">${data.comment}</p>
+      </div>
+    `;
+  });
+});
+
+</script>
+
+</body>
+</html>

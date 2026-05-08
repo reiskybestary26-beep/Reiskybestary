@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tentang — Reisky Bestary</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+  --ink: #0d1117;
+  --ink-soft: #374151;
+  --ink-muted: #9ca3af;
+  --accent: #b45309;
+  --accent-light: #fef3c7;
+  --paper: #faf9f6;
+  --white: #ffffff;
+  --rule: #e5e0d8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── NAVBAR ── */
+.navbar {
+  padding: 20px 0;
+  background: rgba(250,249,246,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  text-decoration: none;
+}
+
+.navbar-brand span {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-left: 3px;
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+
+.nav-link {
+  margin-left: 28px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--accent);
+  transition: width 0.25s;
+}
+
+.nav-link:hover, .nav-link.active { color: var(--ink); }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+/* ── HERO ── */
+.hero {
+  padding: 90px 0 70px;
+  text-align: center;
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 32px; height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 68px;
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--ink);
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero p {
+  font-size: 16px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+.hero-divider {
+  text-align: center;
+  margin: 48px 0 56px;
+  color: var(--ink-muted);
+  font-size: 20px;
+  letter-spacing: 12px;
+}
+
+/* ── ABOUT SECTION ── */
+.about-section {
+  padding-bottom: 80px;
+}
+
+.about-img-wrap {
+  position: relative;
+}
+
+.about-img {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+  height: 520px;
+  filter: grayscale(15%);
+  display: block;
+  border: 1px solid var(--rule);
+}
+
+.about-img-caption {
+  position: absolute;
+  bottom: 20px;
+  left: -16px;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 10px 18px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.about-content {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.about-content h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+  letter-spacing: -0.8px;
+  margin-bottom: 10px;
+}
+
+.about-content h2 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.about-content .lead-text {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.85;
+  font-weight: 300;
+  margin-bottom: 28px;
+  border-left: 2px solid var(--accent);
+  padding-left: 18px;
+}
+
+.about-content p {
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.85;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
+/* ── STATS ROW ── */
+.stats-row {
+  display: flex;
+  gap: 32px;
+  margin: 32px 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.stat-item {}
+
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  display: block;
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 4px;
+  display: block;
+}
+
+/* ── SKILLS / TAGS ── */
+.skills-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 12px;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 5px 14px;
+  letter-spacing: 0.3px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.skill-tag:hover {
+  background: var(--ink);
+  color: var(--white);
+  border-color: var(--ink);
+}
+
+/* ── CTA BUTTON ── */
+.cta-row {
+  margin-top: 32px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.btn-primary-custom {
+  padding: 13px 28px;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary-custom:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+.btn-ghost-custom {
+  padding: 13px 28px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-ghost-custom:hover {
+  background: var(--white);
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* ── VALUES SECTION ── */
+.values-section {
+  padding: 70px 0 80px;
+  border-top: 1px solid var(--rule);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.section-eyebrow::before,
+.section-eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 32px; height: 1px;
+  background: var(--accent);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.value-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 32px 28px;
+  height: 100%;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.value-card:hover {
+  box-shadow: 0 20px 50px rgba(13,17,23,0.08);
+  transform: translateY(-4px);
+}
+
+.value-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--accent-light);
+  line-height: 1;
+  margin-bottom: 16px;
+  display: block;
+  -webkit-text-stroke: 1px var(--accent);
+  color: transparent;
+}
+
+.value-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.2px;
+}
+
+.value-text {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 0;
+  padding: 40px 0;
+  background: var(--ink);
+  color: #6b7280;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+
+footer span { color: var(--accent); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow { animation: fadeUp 0.5s ease both; animation-delay: 0.1s; }
+.hero h1      { animation: fadeUp 0.5s ease both; animation-delay: 0.2s; }
+.hero p       { animation: fadeUp 0.5s ease both; animation-delay: 0.3s; }
+
+.about-img-wrap { animation: fadeUp 0.6s ease both; animation-delay: 0.3s; }
+.about-content  { animation: fadeUp 0.6s ease both; animation-delay: 0.45s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 991px) {
+  .about-content { padding-left: 0; margin-top: 40px; }
+  .about-img-caption { left: 0; }
+}
+
+@media (max-width: 576px) {
+  .hero h1 { font-size: 44px; }
+  .about-content h2 { font-size: 38px; }
+  .stats-row { gap: 20px; }
+  .cta-row { flex-direction: column; align-items: flex-start; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+
+    <a class="navbar-brand" href="index.html">RB<span></span></a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link" href="artikel.html">Pojok Menulis</a></li>
+        <li class="nav-item"><a class="nav-link active" href="tentang.html">Tentang</a></li>
+        <li class="nav-item"><a class="nav-link" href="kontak.html">Kontak</a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Tentang Saya</div>
+    <h1>Pendidik &<br><em>Pemikir</em></h1>
+    <p>Mendedikasikan diri pada transformasi pendidikan digital di Indonesia.</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="container">
+  <div class="hero-divider">— ✦ —</div>
+</div>
+
+<section class="about-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-5">
+        <div class="about-img-wrap">
+            <img src="foto.png" alt="Reisky Bestary">
+          <div class="about-img-caption">Reisky Bestary</div>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="about-content">
+
+          <h2>Reisky<br><em>Bestary</em></h2>
+
+          <p class="lead-text">
+            Seorang pendidik yang mendedikasikan diri pada pengembangan pendidikan digital dan literasi teknologi di Indonesia.
+          </p>
+
+          <p>
+            Melalui website ini saya berbagi pemikiran, artikel, dan refleksi pendidikan untuk mendukung transformasi pembelajaran modern yang inklusif dan berkelanjutan.
+          </p>
+
+          <p>
+            Saya percaya bahwa teknologi, bila digunakan dengan tepat, dapat membuka akses pendidikan berkualitas bagi semua kalangan — dari kota besar hingga pelosok nusantara.
+          </p>
+
+          
+
+          <div class="skills-label">Bidang Fokus</div>
+          <div class="skills-tags">
+            <span class="skill-tag">Pendidikan Digital</span>
+            <span class="skill-tag">Literasi Teknologi</span>
+            <span class="skill-tag">Kurikulum Merdeka</span>
+            <span class="skill-tag">E-Learning</span>
+            <span class="skill-tag">Pengembangan Guru</span>
+            <span class="skill-tag">Inovasi Pembelajaran</span>
+          </div>
+
+          <div class="cta-row">
+            <a href="artikel.html" class="btn-primary-custom">Baca Tulisan Saya</a>
+            <a href="kontak.html" class="btn-ghost-custom">Hubungi Saya</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="container">
+
+    <div class="section-header">
+      <div class="section-eyebrow">Prinsip Saya</div>
+      <h2 class="section-title">Nilai yang <em>Memandu</em></h2>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="value-card">
+          <span class="value-number">01</span>
+          <div class="value-title">Pendidikan untuk Semua</div>
+          <p class="value-text">Setiap anak berhak mendapatkan pendidikan berkualitas, tanpa memandang latar belakang atau lokasi geografis mereka.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="value-card">
+          <span class="value-number">02</span>
+          <div class="value-title">Teknologi Sebagai Jembatan</div>
+          <p class="value-text">Inovasi digital bukan tujuan akhir, melainkan sarana untuk mendekatkan siswa dengan pengetahuan dan potensi terbaik mereka.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="value-card">
+          <span class="value-number">03</span>
+          <div class="value-title">Refleksi & Pertumbuhan</div>
+          <p class="value-text">Menulis adalah cara saya berpikir. Setiap artikel adalah undangan untuk merenungkan bersama arah pendidikan kita ke depan.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    © 2026 <span>Reisky Bestary</span> 
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
